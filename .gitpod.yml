@@ -1,0 +1,15 @@
+image: gitpod/workspace-full
+checkoutLocation: gitpod-k3s
+tasks:
+  - name: prepare k3s
+    command: |
+      .gitpod/prepare-k3s.sh
+  - name: kernel dev environment
+    init: |
+      sudo apt update -y
+      sudo apt install qemu qemu-system-x86 linux-image-$(uname -r) libguestfs-tools sshpass netcat -y
+      sudo curl -o /usr/bin/kubectl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+      sudo chmod +x /usr/bin/kubectl
+      .gitpod/prepare-rootfs.sh
+    command: |
+      .gitpod/qemu.sh
