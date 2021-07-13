@@ -16,7 +16,7 @@ cd $outdir
 
 tar -xvf rootfs.tar.gz
 
-qemu-img resize hirsute-server-cloudimg-amd64.img +20G
+qemu-img resize --preallocation=off hirsute-server-cloudimg-amd64.img +20G
 
 sudo virt-customize -a hirsute-server-cloudimg-amd64.img --run-command 'resize2fs /dev/sda'
 
