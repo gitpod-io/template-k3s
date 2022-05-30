@@ -2,7 +2,7 @@
 
 set -euo pipefail
 
-img_url="https://cloud-images.ubuntu.com/hirsute/current/hirsute-server-cloudimg-amd64.tar.gz"
+img_url="https://cloud-images.ubuntu.com/jammy/current/jammy-server-cloudimg-amd64.tar.gz"
 
 script_dirname="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 outdir="${script_dirname}/_output/rootfs"
@@ -16,11 +16,11 @@ cd $outdir
 
 tar -xvf rootfs.tar.gz
 
-qemu-img resize --preallocation=off hirsute-server-cloudimg-amd64.img +20G
+qemu-img resize --preallocation=off jammy-server-cloudimg-amd64.img +20G
 
-sudo virt-customize -a hirsute-server-cloudimg-amd64.img --run-command 'resize2fs /dev/sda'
+sudo virt-customize -a jammy-server-cloudimg-amd64.img --run-command 'resize2fs /dev/sda'
 
-sudo virt-customize -a hirsute-server-cloudimg-amd64.img --root-password password:root
+sudo virt-customize -a jammy-server-cloudimg-amd64.img --root-password password:root
 
 netconf="
 network:
@@ -32,15 +32,15 @@ network:
 "
 
 # networking setup
-sudo virt-customize -a hirsute-server-cloudimg-amd64.img --run-command "echo '${netconf}' > /etc/netplan/01-net.yaml"
+sudo virt-customize -a jammy-server-cloudimg-amd64.img --run-command "echo '${netconf}' > /etc/netplan/01-net.yaml"
 
 # copy kernel modules
-sudo virt-customize -a hirsute-server-cloudimg-amd64.img --copy-in /lib/modules/$(uname -r):/lib/modules
+sudo virt-customize -a jammy-server-cloudimg-amd64.img --copy-in /lib/modules/$(uname -r):/lib/modules
 
 # ssh
-sudo virt-customize -a hirsute-server-cloudimg-amd64.img --run-command 'apt remove openssh-server -y && apt install openssh-server -y'
-sudo virt-customize -a hirsute-server-cloudimg-amd64.img --run-command "sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config"
-sudo virt-customize -a hirsute-server-cloudimg-amd64.img --run-command "sed -i 's/PasswordAuthentication no/PasswordAuthentication yes/' /etc/ssh/sshd_config"
+sudo virt-customize -a jammy-server-cloudimg-amd64.img --run-command 'apt remove openssh-server -y && apt install openssh-server -y'
+sudo virt-customize -a jammy-server-cloudimg-amd64.img --run-command "sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config"
+sudo virt-customize -a jammy-server-cloudimg-amd64.img --run-command "sed -i 's/PasswordAuthentication no/PasswordAuthentication yes/' /etc/ssh/sshd_config"
 
 # mark as ready
 touch rootfs-ready.lock
