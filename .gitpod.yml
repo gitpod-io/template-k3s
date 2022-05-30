@@ -3,8 +3,6 @@ checkoutLocation: gitpod-k3s
 tasks:
   - name: prepare k3s
     command: |
-      sudo apt update -y
-      sudo apt install netcat -y
       .gitpod/prepare-k3s.sh
   - name: kernel dev environment
     init: |
@@ -17,5 +15,5 @@ tasks:
       .gitpod/prepare-rootfs.sh
     command: |
       sudo apt update -y
-      sudo apt install qemu qemu-system-x86 linux-image-generic -y
+      sudo apt install qemu qemu-system-x86 linux-image-generic netcat -y
       .gitpod/qemu.sh
