@@ -35,7 +35,7 @@ network:
 sudo virt-customize -a jammy-server-cloudimg-amd64.img --run-command "echo '${netconf}' > /etc/netplan/01-net.yaml"
 
 # copy kernel modules
-sudo virt-customize -a jammy-server-cloudimg-amd64.img --copy-in /lib/modules/$(uname -r):/lib/modules
+sudo virt-customize -a jammy-server-cloudimg-amd64.img --copy-in /lib/modules/*:/lib/modules
 
 # ssh
 sudo virt-customize -a jammy-server-cloudimg-amd64.img --run-command 'apt remove openssh-server -y && apt install openssh-server -y'
