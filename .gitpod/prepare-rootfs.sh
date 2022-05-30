@@ -36,7 +36,7 @@ sudo virt-customize -a jammy-server-cloudimg-amd64.img --run-command "echo '${ne
 
 # copy kernel modules
 for kernel_versions in `find /lib/modules -mindepth 1 -maxdepth 1 -type d`; do
-  sudo virt-customize -a jammy-server-cloudimg-amd64.img --copy-in /lib/modules/${kernel_versions}:/lib/modules
+  sudo virt-customize -a jammy-server-cloudimg-amd64.img --copy-in ${kernel_versions}:/lib/modules
 done
 
 # ssh
