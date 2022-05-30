@@ -6,7 +6,6 @@ tasks:
       .gitpod/prepare-k3s.sh
   - name: kernel dev environment
     init: |
-      #gitpod host now runs on kernel 5.16.20 and linux-image 5.16.20 is not available on focal
       sudo apt update -y
       sudo apt upgrade -y
       sudo apt update -y
