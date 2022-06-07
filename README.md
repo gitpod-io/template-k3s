@@ -6,7 +6,7 @@ This is a [k3s](https://k3s.io//) template configured for ephemeral Kubernetes d
 
 Click the button below to start a new development environment:
 
-[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/zwindler/gitpod-template-k3s)
+[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/gitpod-io/template-k3s)
 
 ## Get Started With Your Own Project
 
