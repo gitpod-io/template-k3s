@@ -52,7 +52,7 @@ echo "✅ rootfs available"
 
 echo "Wait for apt lock to end"
 waitapt
-apt install netcat
+sudo apt install netcat
 echo "✅ no more apt lock"
 
 echo "Waiting for the ssh server to become available, it can take a while, after this k3s is getting installed"
