@@ -48,6 +48,8 @@ mkdir -p ~/.kube
 ./scp.sh root@127.0.0.1:/etc/rancher/k3s/k3s.yaml ~/.kube/config
 
 echo "✅ k3s server is ready"
+sudo curl -o /usr/bin/kubectl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+sudo chmod +x /usr/bin/kubectl
 kubectl get pods --all-namespaces
 
 touch "${k3sreadylock}"
